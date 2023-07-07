@@ -1,0 +1,25 @@
+.header{
+    height: 100vh;
+    .header-wrap{
+        height: 100%;
+        background: url('../../assets/img/headerBanner.jpg') no-repeat;
+        background-size: cover;
+        background-position: center;
+        padding: 0 15%;
+        gap: 40%;
+    }
+}
+.header-text{
+    justify-self: center;
+    color: white;
+    font-size: 18px;
+    .text-category{
+        font-size: 1.2em;
+        
+        text-transform: uppercase;
+        font-weight: 400;
+    }
+    .text-title{
+        font-size: 3em;
+    }
+}
