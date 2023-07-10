@@ -8,10 +8,34 @@ import testimg3 from '../../assets/img/testimg3.webp';
 import testimg4 from '../../assets/img/testimg4.jpg';
 import testimg5 from '../../assets/img/testimg5.jpg';
 import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../hook";
+import { getPosts } from "../../store/PostSlice";
+import { Dispatch } from "redux";
+import { Type_Post } from "../../types/types";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../store/store";
+import { PayloadAction } from "@reduxjs/toolkit";
 
-const MAX = 2;
 
 const PostContainer:FC = () =>{
+    const Appdispatch = useAppDispatch();
+    const postList = useAppSelector(state => state.postReducers.postslice.posts);
+
+    const LoadPosts = ():any =>{   // тут не має бути any 
+      return async (dispatch: Dispatch) =>{
+        try{
+          const response = await axios.get('http://localhost:4444/posts');
+          console.log('Res:', response.data);
+          dispatch(getPosts(response.data.posts));
+   
+        }
+        catch(error){
+          console.log('Error:', error);
+        }
+      }
+    }
+
     const test: IPost[] = [
         {title: 'New York Girl', viewsCount: 101, imageUrl:testimg},
         {title: 'My Blue eyes', viewsCount: 21, imageUrl:testimg2},
@@ -20,16 +44,14 @@ const PostContainer:FC = () =>{
         {title: 'Parrot', viewsCount: 101, imageUrl:testimg4},
 
     ];
-    const [page, Setpage] = useState<number | undefined>(Math.ceil(test.length / MAX));
-
     useEffect(()=>{ 
-       
+      Appdispatch(LoadPosts());
     }, [])
 
     return(
       <section className="posts pb-5">
         <div className="posts-container">
-            {test.map(item => <Post title={item.title} viewsCount={item.viewsCount} imageUrl={item.imageUrl}/>)}
+            {postList.map(item => <Post title={item.title} viewsCount={item.viewsCount} imageUrl={item.imageUrl}/>)}
         </div>
       </section>
     );
