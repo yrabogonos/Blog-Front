@@ -12,11 +12,14 @@ type Post = {
 };
 type PostState = {
     posts: Post[],
+    len: number,
 }
 
 
 const initialState: PostState = {
     posts: [],
+    len: 0,
+    
 }
 
 
@@ -30,6 +33,7 @@ const PostSlice = createSlice({
     // }
     getPosts(state, action:PayloadAction<Post[]>){
         state.posts = action.payload;
+        state.len = state.posts.length;
         console.log('State:', state.posts);
         
     }

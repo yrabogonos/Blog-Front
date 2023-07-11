@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { ButtonHTMLAttributes, FC, useState } from "react";
 import './postContainer.scss';
 import Post from "./Post/post";
 import testimg from '../../assets/img/testimg1.webp';
@@ -16,17 +16,19 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { PayloadAction } from "@reduxjs/toolkit";
+import { JsxChild } from "typescript";
 
 
 const PostContainer:FC = () =>{
     const Appdispatch = useAppDispatch();
     const postList = useAppSelector(state => state.postReducers.postslice.posts);
+    const postLen = useAppSelector(state => state.postReducers.postslice.len);
+  
 
     const LoadPosts = ():any =>{   // тут не має бути any 
       return async (dispatch: Dispatch) =>{
         try{
           const response = await axios.get('http://localhost:4444/posts');
-          console.log('Res:', response.data);
           dispatch(getPosts(response.data.posts));
    
         }
@@ -48,10 +50,34 @@ const PostContainer:FC = () =>{
       Appdispatch(LoadPosts());
     }, [])
 
+
+    const MaxPerPage:number = 2;
+    const [curPage, SetPage] = useState(0);
+
+    let links= [];
+    
+   
+
+    for(let i = 0; i < Math.ceil(postLen/MaxPerPage); i++){
+      if(postLen <= MaxPerPage){
+        break;
+      }
+      let className = 'controls-button';
+      if(i === curPage){
+       className = 'controls-button-active';
+      }
+      let el: JSX.Element = <button className={className} onClick={()=>SetPage(i)}>{i+1}</button>;
+      links.push(el);
+    }
+   
     return(
       <section className="posts pb-5">
         <div className="posts-container">
-            {postList.map(item => <Post title={item.title} viewsCount={item.viewsCount} imageUrl={item.imageUrl}/>)}
+            {postList.slice(curPage*MaxPerPage, curPage*MaxPerPage+MaxPerPage)
+            .map(item => <Post title={item.title} viewsCount={item.viewsCount} imageUrl={item.imageUrl}/>)}
+        </div>
+        <div className="posts-controls mt-5 d-flex justify-content-center gap-4">
+              {links}
         </div>
       </section>
     );
