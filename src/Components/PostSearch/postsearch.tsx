@@ -43,7 +43,6 @@ const PostSearch:FC = () =>{
 
     return(
         <div className="postSearch">
-            <button onClick={()=>setF(true)}>render</button>
             <SearchHeader imageUrl={post.imageUrl} />
             <SearchBody F={F} setF={setF} createdAt={post.createdAt} user={post.user} _id={post._id} title={post.title} text={post.text} tags={post.tags} viewsCount={post.viewsCount} imageUrl={post.imageUrl} />
           
