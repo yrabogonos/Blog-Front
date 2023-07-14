@@ -38,14 +38,14 @@ const PostContainer:FC = () =>{
       }
     }
 
-    const test: IPost[] = [
-        {title: 'New York Girl', viewsCount: 101, imageUrl:testimg},
-        {title: 'My Blue eyes', viewsCount: 21, imageUrl:testimg2},
-        {title: 'My walk', viewsCount: 211, imageUrl:testimg5},
-        {title: 'Elephant', viewsCount: 1201, imageUrl:testimg3},
-        {title: 'Parrot', viewsCount: 101, imageUrl:testimg4},
+    // const test: IPost[] = [
+    //     {title: 'New York Girl', viewsCount: 101, imageUrl:testimg},
+    //     {title: 'My Blue eyes', viewsCount: 21, imageUrl:testimg2},
+    //     {title: 'My walk', viewsCount: 211, imageUrl:testimg5},
+    //     {title: 'Elephant', viewsCount: 1201, imageUrl:testimg3},
+    //     {title: 'Parrot', viewsCount: 101, imageUrl:testimg4},
 
-    ];
+    // ];
     useEffect(()=>{ 
       Appdispatch(LoadPosts());
     }, [])
@@ -74,7 +74,7 @@ const PostContainer:FC = () =>{
       <section className="posts pb-5">
         <div className="posts-container">
             {postList.slice(curPage*MaxPerPage, curPage*MaxPerPage+MaxPerPage)
-            .map(item => <Post title={item.title} viewsCount={item.viewsCount} imageUrl={item.imageUrl}/>)}
+            .map(item => <Post _id={item._id} title={item.title} viewsCount={item.viewsCount} imageUrl={item.imageUrl}/>)}
         </div>
         <div className="posts-controls mt-5 d-flex justify-content-center gap-4">
               {links}

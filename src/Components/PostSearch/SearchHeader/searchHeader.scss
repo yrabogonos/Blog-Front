@@ -1,0 +1,13 @@
+.sheader{
+    height: 800px;
+    .sheader-wrap{
+        padding: 0 15%;
+        width: 100%;
+        height: 100%;
+        // background-size: contain !important;
+        // background-position: center !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat;
+    }
+}

@@ -1,8 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import { RootState } from './store';
+// import LionImg from '';
 
 
 type Post = {
+    _id: string,
     title: string,
     text: string,
     tags: string[],
@@ -19,6 +21,7 @@ type PostState = {
 const initialState: PostState = {
     posts: [],
     len: 0,
+    // headerLink = '../../'
     
 }
 
@@ -34,6 +37,7 @@ const PostSlice = createSlice({
     getPosts(state, action:PayloadAction<Post[]>){
         state.posts = action.payload;
         state.len = state.posts.length;
+        console.log('1 id:', state.posts[2]._id);
         console.log('State:', state.posts);
         
     }

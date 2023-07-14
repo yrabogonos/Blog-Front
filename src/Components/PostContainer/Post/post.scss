@@ -1,38 +1,77 @@
 @import '../../../App.scss';
+
+// .post-container{
+//     position: relative;
+//     transition: transform 1s ease;
+    
+// }
+
+// .background-gray{
+//     background-color: #1d1d1d !important;
+//     transition: all 1s ease;
+// }
+// .d{
+//     visibility: hidden !important;
+// }
+// .post-information{
+//     color: white;
+//     position: absolute;
+//     top: 40%;
+//     width: 100%;
+//     font-size: 30px;
+// }
+
+.post{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
 .post-img{
     max-width: 320px;
     max-height: 590px;
 }
 .post-container{
     position: relative;
-    
 }
-.post{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.background-gray{
-    background-color: #1d1d1d !important;
-    transition: all 1s ease;
-}
-.d{
-    visibility: hidden !important;
-}
-.post-information{
+.back-side{
     color: white;
     position: absolute;
-    top: 40%;
+    top: 0;
     width: 100%;
-    font-size: 30px;
+    height: 100%;
+    backface-visibility: hidden;
+    transform: perspective(600px) rotateY(180deg);
+    background-color: #1d1d1d !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: transform .6s linear;
+    
+}
+.front-side{
+    width: 100%;
+    height: 100%;
+    transform: perspective(600px) rotateY(0deg);
+    transition: transform .6s linear;
+}
+
+.post-container:hover > .front-side{
+    transform: perspective(600px) rotateY(-180deg);
+}
+.post-container:hover > .back-side{
+    transform: perspective(600px) rotateY(0deg);
 }
 .inform-link{
     color: white;
     text-decoration: none;
     font-weight: 700;
+    font-size: 30px;
+    padding-bottom: 10px;
 }
 .inform-views{
-    font-size: .8em;
+    font-size: 24px;
     font-weight: 400;
 }
 .inform-name{
