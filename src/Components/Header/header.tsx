@@ -2,11 +2,11 @@ import { FC } from "react";
 import './header.scss';
 import Navigation from "./Nav/nav";
 
-const Header:FC = () =>{
+const Header:FC<{setModalActive:(modalActive:boolean)=>void}> = ({setModalActive}) =>{
     return(
         <section className="header">
             <div className="header-wrap d-flex flex-column">
-                {<Navigation />}
+                {<Navigation setModalActive={setModalActive} />}
                 <div className="header-text">
                     <h4 className="text-category">Photography</h4>
                     <h2 className="text-title">African Lion <br /> Feel The Leadership </h2>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import Header from './Components/Header/header';
 import Greating from './Components/Greating/greating';
@@ -7,15 +7,19 @@ import Footer from './Components/Footer/footer';
 import { Routes, Route } from 'react-router-dom';
 import PostDetails from './Components/PostDetails/postDetails';
 import PostSearch from './Components/PostSearch/postsearch';
+import ModalWindow from './Components/ModalWindow/mw';
 
 function App() {
+
+  const [modalActive, setModalActive] = useState<boolean>(false);
+  
   return (
     <div className="App">
         <Routes>
 
           <Route path='/' element={
             <>
-              <Header />
+              <Header setModalActive={setModalActive}/>
               <Greating />
               <PostContainer />
             </>
@@ -28,6 +32,7 @@ function App() {
           } />
         </Routes>
         <Footer />
+        <ModalWindow modalActive={modalActive} setModalActive={setModalActive}/>
     </div>
   );
 }

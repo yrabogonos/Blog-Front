@@ -15,7 +15,7 @@ const SearchHeader:FC<HeaderProps> = ({
     return(
         <section className="sheader">
             <div className="sheader-wrap d-flex flex-column" style={{background:`url(${imageUrl}) no-repeat`}}>
-                {<Navigation />}
+                {/* {<Navigation />} // треба добавити SetmodalActive*/}  
                 {/* <img src={imageUrl} alt="postimage" /> */}
                 
             </div>            
